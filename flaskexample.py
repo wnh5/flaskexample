@@ -10,7 +10,9 @@ from flask import Flask, request, session, g, redirect, url_for, \
     abort, render_template, flash, Blueprint
 
 # configuration
-from jinja2 import TemplateNotFound
+from tornado.httpserver import HTTPServer
+from tornado.ioloop import IOLoop
+from tornado.wsgi import WSGIContainer
 
 DATABASE = '/Users/liuche/tmp/flaskr.db'
 DEBUG = True
@@ -85,4 +87,10 @@ app.register_blueprint(simple_page)
 
 if __name__ == '__main__':
     # init_db()
-    app.run(port=8080)
+    # app.run(port=8080)
+    #tornado WSGI 容器
+    http_server = HTTPServer(WSGIContainer(app))
+    #flask默认的端口,可任意修改
+    http_server.listen(8080)
+    IOLoop.instance().start()
+
