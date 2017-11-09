@@ -1,5 +1,13 @@
 <!doctype html>
-<div class=flash>{{ message }}</div>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class=flashes>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
 <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
     <input type=file name=photo>
     <input type=submit>
