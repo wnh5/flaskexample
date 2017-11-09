@@ -15,7 +15,8 @@ def adduser():
 
 @app.route("/query/<user>/")
 def queryuser(user):
-    u = User.query.filter(User.name == user).first()
+    u = User.load(1)
+    # u = User.query.filter(User.name == user).first()
     return u.name
 
 @app.teardown_request
