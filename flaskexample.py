@@ -85,6 +85,9 @@ def show(page):
 #蓝图注册在app中
 app.register_blueprint(simple_page)
 
+#uwsgi命令
+#uwsgi -s /tmp/uwsgi.sock --module flaskexample --callable app --http-socket :8080
+
 if __name__ == '__main__':
     # init_db()
     # app.run(port=8080)
